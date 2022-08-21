@@ -1,0 +1,35 @@
+<mat-spinner *ngIf="loader"></mat-spinner>
+<mat-accordion multi="true" *ngIf="projects.length > 0 && !loader">
+  <mat-expansion-panel hideToggle *ngFor="let project of projects">
+    <mat-expansion-panel-header>
+      <mat-panel-title> {{project.name}}</mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="post-image">
+        <img [src]="project.image" [alt]="project.name">
+    </div>
+    <p>{{project.address}}</p>
+    <p>{{project.status}}</p>
+    <p>{{project.endDate}}</p>
+    <hr *ngIf="project.comments && project.comments.length > 0">
+    <div *ngIf="project.comments && project.comments.length > 0">
+        <span *ngFor="let comment of project.comments">
+            <p>{{comment.description}}</p>
+            <div class="post-image">
+              <img [src]="comment.image">
+            </div>
+        </span>
+    </div>
+    <mat-action-row *ngIf="isAuth">
+      <a mat-button color="primary" [routerLink]="['/addComment',project.id]">Add Comment</a>
+    </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>
+<mat-paginator [length]="totalProjects"
+              [pageSize]="projectsPerPage"
+              [pageSizeOptions]="pageSizeOptions"
+              (page)="onChangePage($event)"
+              aria-label="Select page"
+              *ngIf="projects.length > 0">
+</mat-paginator>
+
+<p *ngIf="projects.length < 1 && !loader" class="info-text">There are no projects</p>
