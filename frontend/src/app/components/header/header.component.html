@@ -10,9 +10,6 @@
     <li *ngIf="!userIsAuth">
       <a mat-button routerLink="/login" routerLinkActive="mat-accent">Login</a>
     </li>
-    <li *ngIf="!userIsAuth">
-      <a mat-button routerLink="/signup" routerLinkActive="mat-accent">Signup</a>
-    </li>
     <li *ngIf="userIsAuth">
       <button mat-button (click)="onLogout()">Logout</button>
     </li>

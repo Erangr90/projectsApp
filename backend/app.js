@@ -13,6 +13,17 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 // Images Folder
 app.use("/images", express.static(path.join('backend/images')))
+// Loges
+app.use('*', (req,res,next)=>{
+  console.log(req.protocol + '://' + req.get('host') + req.originalUrl)
+  next()
+  
+})
+app.use('*', (req,res,next)=>{
+  console.log(res.protocol + '://' + res.get('host') + res.originalUrl)
+  next()
+  
+})
 
 connectDB();
 // Set headers responses
